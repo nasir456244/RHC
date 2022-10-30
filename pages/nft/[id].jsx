@@ -1,13 +1,34 @@
 import Image from 'next/image'
 import React from 'react'
-import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
+import { useAddress, useDisconnect, useMetamask, useContract } from "@thirdweb-dev/react";
 import { sanityClient, urlFor } from '../../sanity';
 import Link from 'next/link';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const NFTDropPage = ({ collection }) => {
+    const [claimedSupply, setClaimedSupply] = useState(0);
+    const [totalSupply, setTotalSupply] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const nftDrop = useContract(collection.address, "nft-drop").contract;
     const address = useAddress();
     const connectWithMetamask = useMetamask();
     const disconnect = useDisconnect();
+
+    useEffect(() => {
+        if(!nftDrop) return;
+        const fetchNFTDropData = async () => {
+            setLoading(true);
+            const claimed = await nftDrop.getAllClaimed();
+            const total = await nftDrop.totalSupply();
+            setClaimedSupply(claimed?.length);
+            setTotalSupply(total);
+            setLoading(false);
+        }
+        fetchNFTDropData();
+    },[nftDrop])
+
+    console.log(claimedSupply, 'claim', totalSupply , 'to')
     
   return (
     <div className='h-screen flex flex-col lg:grid lg:grid-cols-10'>
@@ -52,7 +73,12 @@ const NFTDropPage = ({ collection }) => {
                 text-center lg:space-y-0 lg:justify-center'>
                 <Image width={320} height={545} className='object-cover pb-10 lg:h-40' src={urlFor(collection?.mainImage).url()} alt="mainImage"/> 
                 <h1 className='text-3xl font-bold lg:text-5xl lg:font-extrabold'>{collection?.title}</h1>
-                <p className='pt-2 text-xl text-green-500'> 13 / 21 NFT&apos;s claimed</p>
+                {loading ? (
+                    <p className='pt-2 text-xl text-green-500 animate-bounce'>Loading Supply Count...</p>
+                ) :
+                (
+                    <p className='pt-2 text-xl text-green-500'> {claimedSupply} / {totalSupply?.toString()} NFT&apos;s claimed</p>
+                )}
             </div>
 
             <button className='mt-10 h-16 bg-red-600 w-full text-white 
