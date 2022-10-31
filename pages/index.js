@@ -58,9 +58,6 @@ const query = `*[_type == "collection"] {
     _id,
     name,
     address,
-    slug {
-      current
-    }
   },
 }`;
 

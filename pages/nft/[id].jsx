@@ -27,8 +27,6 @@ const NFTDropPage = ({ collection }) => {
         }
         fetchNFTDropData();
     },[nftDrop])
-
-    console.log(claimedSupply, 'claim', totalSupply , 'to')
     
   return (
     <div className='h-screen flex flex-col lg:grid lg:grid-cols-10'>
@@ -92,45 +90,64 @@ export default NFTDropPage
 
 
 
-export const getServerSideProps = async ({ params }) => {
-    const query = `*[_type == "collection" && slug.current == $id][0] {
+export const getStaticPaths = async () => {
+  const query = `*[_type == "collection"] {
+    slug {
+      current
+    },
+    
+  }`;
+
+  const res = await sanityClient.fetch(query);
+
+  const paths = res.map((item) => {
+    return {
+      params: {
+        id: item.slug.current
+      }
+    }
+  });
+
+  return {
+    paths,
+    fallback: false
+  }
+
+}
+
+
+
+export const getStaticProps = async ({ params }) => {
+  const query = `*[_type == "collection" && slug.current == $id][0] {
+    _id,
+    title,
+    address,
+    description,
+    nftCollectionName,
+    mainImage {
+      asset
+    },
+    previewImage {
+      asset
+    },
+    creator-> {
       _id,
-      title,
+      name,
       address,
-      description,
-      nftCollectionName,
-      mainImage {
-        asset
-      },
-      previewImage {
-        asset
-      },
       slug {
         current
-      },
-      creator-> {
-        _id,
-        name,
-        address,
-        slug {
-          current
-        }
-      },
-    }`;
-  
+      }
+    },
+  }`;
+
     const collection = await sanityClient.fetch(query, {
         id: params?.id
     });
 
-    if(!collection) {
-        return {
-            notFound: true
-        }
-    }
-  
     return {
       props: {
         collection
-      }
+      },
+      revalidate: 10
     }
   }
