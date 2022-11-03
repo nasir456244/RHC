@@ -13,10 +13,10 @@ export default function Home({ collections }) {
       </Head>
 
       <h1 className='mb-10 text-4xl font-extralight'>The {''}
-                    <span className='font-extrabold underline decoration-pink-600/50'>
-                        BIDAAR 
-                    </span> {''}
-                    NFT Market place
+        <span className='font-extrabold underline decoration-pink-600/50'>
+          BIDAAR 
+        </span> {''}
+        NFT Market place
       </h1>
       <div className='bg-slate-100 p-10 shadow-xl shadow-rose-400/20'>
         <div className='grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>

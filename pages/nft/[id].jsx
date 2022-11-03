@@ -5,31 +5,88 @@ import { sanityClient, urlFor } from '../../sanity';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import toast, { Toaster } from 'react-hot-toast'
 const NFTDropPage = ({ collection }) => {
     const [claimedSupply, setClaimedSupply] = useState(0);
     const [totalSupply, setTotalSupply] = useState(0);
     const [loading, setLoading] = useState(true);
-    const nftDrop = useContract(collection.address, "nft-drop").contract;
+    const [priceInMatic, setPriceInMatic] = useState(true);
     const address = useAddress();
     const connectWithMetamask = useMetamask();
     const disconnect = useDisconnect();
+    const nftDrop = useContract(collection?.address, "nft-drop").contract
+
+
+    useEffect(() => {
+      if(!nftDrop) return;
+      const fetPrice = async () => {
+        const claimConditions = await nftDrop?.claimConditions?.getAll();
+        setPriceInMatic(claimConditions?.[0]?.currencyMetadata?.displayValue)
+      }
+      fetPrice()
+    },[nftDrop])
 
     useEffect(() => {
         if(!nftDrop) return;
         const fetchNFTDropData = async () => {
-            setLoading(true);
-            const claimed = await nftDrop.getAllClaimed();
-            const total = await nftDrop.totalSupply();
-            setClaimedSupply(claimed?.length);
-            setTotalSupply(total);
-            setLoading(false);
+          setLoading(true);
+          const claimed = await nftDrop.getAllClaimed();
+          const total = await nftDrop.totalSupply();
+          setClaimedSupply(claimed?.length);
+          setTotalSupply(total);
+          setLoading(false);
         }
         fetchNFTDropData();
     },[nftDrop])
-    
+
+
+    const mintNft = () => {
+      if(!address || !nftDrop || claimedSupply === totalSupply?.toString()) return;
+
+      setLoading(true);
+      const notification = toast.loading('Minting', {
+        style : {
+          background: 'white',
+          color: 'green',
+          fontWeight: 'bolder',
+          fontSize: '17',
+          padding: '20px'
+        }
+      })
+
+      const quantity = 1;
+      nftDrop?.claimTo(address, quantity).then((tx) => {
+        toast("HOORAY, You Successfully Minted!", {
+          style : {
+            background: 'white',
+            color: 'green',
+            fontWeight: 'bolder',
+            fontSize: '17',
+            padding: '20px'
+          }
+        })
+        setClaimedSupply((prev) => prev + 1);
+      })
+      .catch((err) => {
+        toast("Whoops... Something went wrong!", {
+          style : {
+            background: 'red',
+            color: 'white',
+            fontWeight: 'bolder',
+            fontSize: '17',
+            padding: '20px'
+          }
+        })
+      })
+      .finally(() => {
+        setLoading(false);
+        toast.dismiss(notification);
+      })
+    }
+  
   return (
     <div className='h-screen flex flex-col lg:grid lg:grid-cols-10'>
+      <Toaster position='bottom-center' />
         <div className='flex items-center justify-center bg-gradient-to-br 
             from-cyan-800 to-rose-500 lg:h-screen lg:col-span-4 '>
            <div className='flex flex-col items-center justify-center py-2'>
@@ -77,10 +134,29 @@ const NFTDropPage = ({ collection }) => {
                 (
                     <p className='pt-2 text-xl text-green-500'> {claimedSupply} / {totalSupply?.toString()} NFT&apos;s claimed</p>
                 )}
+                {loading && (
+                  <Image alt='loader' height={320} width={320} className='object-contain' src={"https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"} />
+                )}
             </div>
 
-            <button className='mt-10 h-16 bg-red-600 w-full text-white 
-            rounded-full font-bold'>Mint NFT (0.01 ETH)</button>
+            <button onClick={mintNft} 
+            disabled={loading || !address || claimedSupply === totalSupply?.toString()} 
+            className='disabled:bg-gray-400 disabled:cursor-not-allowed mt-10 h-16 bg-red-600 w-full text-white 
+            rounded-full font-bold'>
+              {loading ? (
+                'Loading'
+              )
+              : claimedSupply === totalSupply?.toString() ? (
+                'SOLD OUT'
+              ) : !address ? (
+                'Sign In'
+              ):
+                <span className='font-bold'>
+                  Mint NFT ({priceInMatic} MATIC)
+                </span>
+              }
+              
+              </button>
         </div>
     </div>
   )
