@@ -129,13 +129,13 @@ const NFTDropPage = ({ collection }) => {
                 <Image width={320} height={545} className='object-cover pb-10 lg:h-40' src={urlFor(collection?.mainImage).url()} alt="mainImage"/> 
                 <h1 className='text-3xl font-bold lg:text-5xl lg:font-extrabold'>{collection?.title}</h1>
                 {loading ? (
-                    <p className='pt-2 text-xl text-green-500 animate-bounce'>Loading Supply Count...</p>
+                    <p className='pt-2 text-xl text-green-500'>Loading Supply Count...</p>
                 ) :
                 (
                     <p className='pt-2 text-xl text-green-500'> {claimedSupply} / {totalSupply?.toString()} NFT&apos;s claimed</p>
                 )}
                 {loading && (
-                  <Image alt='loader' height={320} width={320} className='object-contain' src={"https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"} />
+                  <Image alt='loader' height={220} width={220} className='object-contain' src={"https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"} />
                 )}
             </div>
 
