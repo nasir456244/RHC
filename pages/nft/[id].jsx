@@ -6,10 +6,15 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast'
+
+
 const NFTDropPage = ({ collection }) => {
     const [claimedSupply, setClaimedSupply] = useState(0);
     const [totalSupply, setTotalSupply] = useState(0);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState({
+      loadSupply: true,
+      minting: false,
+    });
     const [priceInMatic, setPriceInMatic] = useState(true);
     const address = useAddress();
     const connectWithMetamask = useMetamask();
@@ -29,12 +34,12 @@ const NFTDropPage = ({ collection }) => {
     useEffect(() => {
         if(!nftDrop) return;
         const fetchNFTDropData = async () => {
-          setLoading(true);
+          setLoading((prev) => ({...prev, loadSupply: true}));
           const claimed = await nftDrop.getAllClaimed();
           const total = await nftDrop.totalSupply();
           setClaimedSupply(claimed?.length);
           setTotalSupply(total);
-          setLoading(false);
+          setLoading((prev) => ({...prev, loadSupply: false}));
         }
         fetchNFTDropData();
     },[nftDrop])
@@ -43,7 +48,7 @@ const NFTDropPage = ({ collection }) => {
     const mintNft = () => {
       if(!address || !nftDrop || claimedSupply === totalSupply?.toString()) return;
 
-      setLoading(true);
+      setLoading((prev) => ({...prev, minting:true}));
       const notification = toast.loading('Minting', {
         style : {
           background: 'white',
@@ -79,7 +84,7 @@ const NFTDropPage = ({ collection }) => {
         })
       })
       .finally(() => {
-        setLoading(false);
+        setLoading((prev) => ({...prev, minting: false}));
         toast.dismiss(notification);
       })
     }
@@ -128,32 +133,39 @@ const NFTDropPage = ({ collection }) => {
                 text-center lg:space-y-0 lg:justify-center'>
                 <Image width={320} height={545} className='object-cover pb-10 lg:h-40' src={urlFor(collection?.mainImage).url()} alt="mainImage"/> 
                 <h1 className='text-3xl font-bold lg:text-5xl lg:font-extrabold'>{collection?.title}</h1>
-                {loading ? (
+                {loading.loadSupply ? (
                     <p className='pt-2 text-xl text-green-500'>Loading Supply Count...</p>
                 ) :
                 (
                     <p className='pt-2 text-xl text-green-500'> {claimedSupply} / {totalSupply?.toString()} NFT&apos;s claimed</p>
                 )}
-                {loading && (
+                {loading?.loadSupply && (
+                  <Image alt='loader' height={220} width={220} className='object-contain' src={"https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"} />
+                )} 
+                {loading?.minting && (
                   <Image alt='loader' height={220} width={220} className='object-contain' src={"https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"} />
                 )}
             </div>
 
             <button onClick={mintNft} 
-            disabled={loading || !address || claimedSupply === totalSupply?.toString()} 
+            disabled={loading.loadSupply || loading.minting || !address || claimedSupply === totalSupply?.toString()} 
             className='disabled:bg-gray-400 disabled:cursor-not-allowed mt-10 h-16 bg-red-600 w-full text-white 
             rounded-full font-bold'>
-              {loading ? (
-                'Loading'
+              {loading.loadSupply ? (
+                'Loading...'
               )
               : claimedSupply === totalSupply?.toString() ? (
                 'SOLD OUT'
               ) : !address ? (
                 'Sign In'
-              ):
+              ): loading.minting ? (
+                'Minting...'
+              ): (
+
                 <span className='font-bold'>
                   Mint NFT ({priceInMatic} MATIC)
                 </span>
+              )
               }
               
               </button>
