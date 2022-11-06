@@ -46,7 +46,7 @@ const NFTDropPage = ({ collection }) => {
 
 
     const mintNft = () => {
-      if(!address || !nftDrop || claimedSupply === totalSupply?.toString()) return;
+      if(!address || !nftDrop || claimedSupply === totalSupply?.toNumber()) return;
 
       setLoading((prev) => ({...prev, minting:true}));
       const notification = toast.loading('Minting', {
@@ -137,7 +137,7 @@ const NFTDropPage = ({ collection }) => {
                     <p className='pt-2 text-xl text-green-500'>Loading Supply Count...</p>
                 ) :
                 (
-                    <p className='pt-2 text-xl text-green-500'> {claimedSupply} / {totalSupply?.toString()} NFT&apos;s claimed</p>
+                    <p className='pt-2 text-xl text-green-500'> {claimedSupply} / {totalSupply?.toNumber()} NFT&apos;s claimed</p>
                 )}
                 {loading?.loadSupply && (
                   <Image alt='loader' height={220} width={220} className='object-contain' src={"https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"} />
@@ -148,13 +148,13 @@ const NFTDropPage = ({ collection }) => {
             </div>
 
             <button onClick={mintNft} 
-            disabled={loading.loadSupply || loading.minting || !address || claimedSupply === totalSupply?.toString()} 
+            disabled={loading.loadSupply || loading.minting || !address || claimedSupply === totalSupply?.toNumber()} 
             className='disabled:bg-gray-400 disabled:cursor-not-allowed mt-10 h-16 bg-red-600 w-full text-white 
             rounded-full font-bold'>
               {loading.loadSupply ? (
                 'Loading...'
               )
-              : claimedSupply === totalSupply?.toString() ? (
+              : claimedSupply === totalSupply?.toNumber() ? (
                 'SOLD OUT'
               ) : !address ? (
                 'Sign In'
