@@ -93,7 +93,7 @@ const NFTDropPage = ({ collection }) => {
     <div className='h-screen flex flex-col lg:grid lg:grid-cols-10'>
       <Toaster position='bottom-center' />
         <div className='flex items-center justify-center bg-gradient-to-br 
-            from-cyan-800 to-rose-500 lg:h-screen lg:col-span-4 '>
+            from-cyan-800 to-rose-500 lg:min-h-screen lg:col-span-4 '>
            <div className='flex flex-col items-center justify-center py-2'>
                 <div className='bg-gradient-to-br from-yellow-400 
                     to-purple-600 p-2 rounded-xl'>
