@@ -12,13 +12,13 @@ export default function Home({ collections }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className='mb-10 text-4xl font-extralight'>The {''}
-        <span className='font-extrabold underline decoration-pink-600/50'>
+      <h1 className='mb-10 text-4xl text-gray-200 font-extralight'>The {''}
+        <span className='font-extrabold underline decoration-pink-400/50'>
           RHC 
         </span> {''}
         NFT Market place
       </h1>
-      <div className='bg-slate-100 p-10 shadow-xl shadow-rose-400/20'>
+      <div className='bg-black p-10 shadow-xl shadow-rose-400/20'>
         <div className='grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>
           {collections?.map((collection) => (
             <Link key={collection?._id} href={`/nft/${collection.slug.current}`}>
@@ -26,8 +26,8 @@ export default function Home({ collections }) {
               transition-all duration-200 hover:scale-105'>
                 <Image priority={true} height={384} width={240} className='rounded-2xl object-cover' src={urlFor(collection?.mainImage).url()} alt="mainImage" />   
                 <div className='p-5'>
-                  <h2 className='text-3xl'>{collection?.title}</h2>
-                  <p className='mt-2 text-sm text-gray-400'>{collection?.description}</p>
+                  <h2 className='text-3xl text-gray-200'>{collection?.title}</h2>
+                  <p className='mt-2 text-sm text-gray-400 '>{collection?.description}</p>
                 </div>
               </div>
             </Link>

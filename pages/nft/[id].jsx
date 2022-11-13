@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast'
+import loader from '../../public/loader.gif'
 
 
 const NFTDropPage = ({ collection }) => {
@@ -112,9 +113,9 @@ const NFTDropPage = ({ collection }) => {
             <div className='flex items-center justify-between'>
                 <Link href={'/'}>
 
-                    <h1 className='w-52 cursor-pointer text-xl font-extralight 
+                    <h1 className='w-52 cursor-pointer text-gray-200 text-xl font-extralight 
                     sm:w-80'>The {''}
-                        <span className='font-extrabold underline decoration-pink-600/50'>
+                        <span className='font-extrabold underline decoration-pink-400/50'>
                             RHC 
                         </span> {''}
                         NFT Market place</h1>
@@ -130,9 +131,9 @@ const NFTDropPage = ({ collection }) => {
 
 
             <div className='mt-10 flex flex-1 flex-col items-center space-y-6
-                text-center lg:space-y-0 lg:justify-center'>
+                text-center lg:space-y-0 lg:justify-center gap-5'>
                 <Image width={320} height={545} className='object-cover pb-10 lg:h-40' src={urlFor(collection?.mainImage).url()} alt="mainImage"/> 
-                <h1 className='text-3xl font-bold lg:text-5xl lg:font-extrabold'>{collection?.title}</h1>
+                <h1 className='text-3xl font-bold lg:text-5xl lg:font-extrabold text-gray-200'>{collection?.title}</h1>
                 {loading.loadSupply ? (
                     <p className='pt-2 text-xl text-green-500'>Loading Supply Count...</p>
                 ) :
@@ -140,10 +141,10 @@ const NFTDropPage = ({ collection }) => {
                     <p className='pt-2 text-xl text-green-500'> {claimedSupply} / {totalSupply?.toNumber()} NFT&apos;s claimed</p>
                 )}
                 {loading?.loadSupply && (
-                  <Image alt='loader' height={220} width={220} className='object-contain' src={"https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"} />
+                  <Image alt='loader' height={250} width={250} className='object-contain' src={loader} />
                 )} 
                 {loading?.minting && (
-                  <Image alt='loader' height={220} width={220} className='object-contain' src={"https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"} />
+                  <Image alt='loader' height={250} width={250} className='object-contain' src={loader} />
                 )}
             </div>
 
