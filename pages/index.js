@@ -14,7 +14,7 @@ export default function Home({ collections }) {
 
       <h1 className='mb-10 text-4xl font-extralight'>The {''}
         <span className='font-extrabold underline decoration-pink-600/50'>
-          BIDAAR 
+          RHC 
         </span> {''}
         NFT Market place
       </h1>
