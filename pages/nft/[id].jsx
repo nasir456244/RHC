@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast'
 import loader from '../../public/loader.gif'
+import Head from 'next/head'
 
 
 const NFTDropPage = ({ collection }) => {
