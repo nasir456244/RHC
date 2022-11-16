@@ -1,0 +1,146 @@
+.mintButton {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem; 
+    padding-left: 2.5rem;
+    padding-right: 2.5rem; 
+    background-color: #FCD34D; 
+    font-weight: 700; 
+    font-size: 20px;
+    width: 200px;
+}
+
+.modalContainer {
+    display: flex; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    position: fixed; 
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; 
+    z-index: 50; 
+    margin: 0.75rem; 
+    justify-content: center; 
+    align-items: center; 
+    outline: 0; 
+}
+
+.mintParent {
+    display: flex; 
+    overflow: hidden; 
+    position: relative; 
+    flex-direction: column; 
+    align-items: center; 
+    max-height: 100%; 
+    border-radius: 0.5rem; 
+    gap: 1.25rem; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+    background: #b4b8b5;
+    width: 500px;
+}
+.headerContainer {
+    margin-top: 2.5rem; 
+    width: 260px;
+}
+.headerText {
+    text-align: center; 
+    text-transform: uppercase; 
+    font-size: 30px;
+}
+
+.ImageHeader {
+    object-fit: cover; 
+    height: 260px;
+    width: 260px;
+}
+
+.bodyContainer {
+    display: flex; 
+    margin-top: 2.5rem; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+.ConnectButton {
+    background-color: #000000; 
+    color: #ffffff; 
+    text-transform: uppercase; 
+    width: 200px;
+    padding: 10px;
+}
+
+.bodyParent {
+    display: flex;
+    gap: 1rem; 
+}
+
+.mintContainer {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-width: 2px; 
+    border-color: #4B5563; 
+    width: 100px;
+}
+
+.mintInput {
+    padding: 0.5rem; 
+    text-align: center; 
+    width: 50%; 
+    height: 100%; 
+    outline: 0; 
+    background: #b4b8b5;
+}
+
+.qtyContainer {
+    display: flex; 
+    margin-left: 0.5rem;
+    margin-right: 0.5rem; 
+    flex-direction: column; 
+    gap: 0.25rem; 
+}
+.qtyButton1 {
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid rgb(75 85 99);
+}
+
+.qtyButton2 {
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid rgb(75 85 99);
+}
+
+.minButton {
+    background-color: #000000; 
+    color: #ffffff; 
+    text-transform: uppercase; 
+    font-size: 20px;
+    width: 140px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.loadingtext {
+    padding-top: 0.5rem; 
+    color: #000000; 
+    font-size: 1.25rem;
+    line-height: 1.75rem;     
+}
+.bgContainer {
+    display: flex; 
+    padding: 0.5rem; 
+    margin-top: 2.5rem; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+}
+.ViewCards {
+    text-decoration: underline; 
+    text-transform: uppercase; 
+}
