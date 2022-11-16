@@ -84,7 +84,7 @@ const MintModal = () => {
                     <h1 className={styles.headerText}>The Oracle will see you now.</h1>
                   </div>
                   <div>
-                    <Image src={animaheadpose1} alt="animaheadpose1" className={styles.ImageHeader} />
+                    <Image priority src={animaheadpose1} alt="animaheadpose1" className={styles.ImageHeader} />
                   </div>
                   <div className={styles.bodyContainer}>
                         {!address ? (
@@ -129,7 +129,7 @@ const MintModal = () => {
         className="justify-center mt-20 flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none m-3"
         >
             <div className='bg-black w-[400px] h-[500px] rounded-[10px]'>
-                <Image src={showgif} alt="gif" />    
+                <Image src={showgif} priority alt='gif' />    
             </div>
             <div className="opacity-50 fixed inset-0 z-40 bg-black" />
 
