@@ -80,7 +80,7 @@ import React from 'react'
 import MintModal from '../components/MintModal';
 
 
-const nfts = () => {
+export default function nfts()  {
   return (
     <div style={{display: 'flex', overflow: 'hidden', backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', width: '100vw', height: '100vh'}}>
       <div>
@@ -90,4 +90,3 @@ const nfts = () => {
   )
 }
 
-export default nfts
