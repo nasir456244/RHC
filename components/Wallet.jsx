@@ -13,7 +13,7 @@ const Wallet = () => {
   return (
     <div className={styles.container}>
         <div className={styles.ImageContainer}>
-            <Image className={styles.imageHeader} src={header} priority alt="gif" />
+            <Image className={styles.imageHeader} src={header} alt="gif" />
         </div>
 
         {isLoading && <p>Loading....</p>}
