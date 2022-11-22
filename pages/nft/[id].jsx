@@ -7,7 +7,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast'
 import loader from '../../public/loader.gif'
-import Head from 'next/head'
+import Head from 'next/head';
+import { useChainId } from "@thirdweb-dev/react";
+
 
 
 const NFTDropPage = ({ collection }) => {
@@ -21,7 +23,8 @@ const NFTDropPage = ({ collection }) => {
     const address = useAddress();
     const connectWithMetamask = useMetamask();
     const disconnect = useDisconnect();
-    const nftDrop = useContract(collection?.address, "nft-drop").contract
+    const nftDrop = useContract(collection?.address, "nft-drop").contract;
+    const currentChainId = useChainId();
 
 
     useEffect(() => {
@@ -89,7 +92,8 @@ const NFTDropPage = ({ collection }) => {
         setLoading((prev) => ({...prev, minting: false}));
         toast.dismiss(notification);
       })
-    }
+    }   
+
   
   return (
     <div className='h-screen flex flex-col lg:grid lg:grid-cols-10'>
@@ -154,7 +158,7 @@ const NFTDropPage = ({ collection }) => {
             </div>
 
             <button onClick={mintNft} 
-            disabled={loading.loadSupply || loading.minting || !address || claimedSupply === totalSupply?.toNumber()} 
+            disabled={loading.loadSupply || loading.minting || !address || claimedSupply === totalSupply?.toNumber() || currentChainId !== 80001} 
             className='disabled:bg-gray-400 disabled:cursor-not-allowed mt-10 h-16 bg-red-600 w-full text-white 
             rounded-full font-bold'>
               {loading.loadSupply ? (
@@ -166,7 +170,12 @@ const NFTDropPage = ({ collection }) => {
                 'Sign In'
               ): loading.minting ? (
                 'Minting...'
-              ): (
+              )
+              : currentChainId !== 80001 ? (
+                  <p>wrong network (Switch to Polygon)</p>
+              ):
+              
+              (
 
                 <span className='font-bold'>
                   Mint NFT ({priceInMatic} MATIC)
