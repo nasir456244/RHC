@@ -158,7 +158,7 @@ const NFTDropPage = ({ collection }) => {
             </div>
 
             <button onClick={mintNft} 
-            disabled={loading.loadSupply || loading.minting || !address || claimedSupply === totalSupply?.toNumber() || currentChainId !== 80001} 
+            disabled={loading.loadSupply || loading.minting || !address || claimedSupply === totalSupply?.toNumber() || currentChainId !== 137} 
             className='disabled:bg-gray-400 disabled:cursor-not-allowed mt-10 h-16 bg-red-600 w-full text-white 
             rounded-full font-bold'>
               {loading.loadSupply ? (
@@ -171,7 +171,7 @@ const NFTDropPage = ({ collection }) => {
               ): loading.minting ? (
                 'Minting...'
               )
-              : currentChainId !== 80001 ? (
+              : currentChainId !== 137 ? (
                   <p>wrong network (Switch to Polygon)</p>
               ):
               
