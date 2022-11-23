@@ -11,8 +11,8 @@
   "dependencies": {
     "@sanity/cli": "^2.35.0",
     "@sanity/image-url": "^1.0.1",
-    "@thirdweb-dev/react": "^3.4.4",
-    "@thirdweb-dev/sdk": "^3.4.4",
+    "@thirdweb-dev/react": "^3.6.2",
+    "@thirdweb-dev/sdk": "^3.6.2",
     "next": "13.0.0",
     "next-sanity": "^1.0.3",
     "react": "18.2.0",

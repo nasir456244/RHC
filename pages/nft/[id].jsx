@@ -19,7 +19,7 @@ const NFTDropPage = ({ collection }) => {
       loadSupply: true,
       minting: false,
     });
-    const [priceInMatic, setPriceInMatic] = useState(true);
+    const [priceInMatic, setPriceInMatic] = useState("");
     const address = useAddress();
     const connectWithMetamask = useMetamask();
     const disconnect = useDisconnect();
