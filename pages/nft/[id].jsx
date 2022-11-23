@@ -107,7 +107,7 @@ const NFTDropPage = ({ collection }) => {
            <div className='flex flex-col items-center justify-center py-2'>
                 <div className='bg-gradient-to-br from-yellow-400 
                     to-purple-600 p-2 rounded-xl'>
-                    <Image width={176} height={545} className='bg-[#FAE6B2] rounded-xl object-cover lg:h-96 lg:w-72' 
+                    <Image width={176} height={545} className=' rounded-xl object-cover lg:h-96 lg:w-72' 
                         alt='previewImage' src={urlFor(collection?.previewImage).url()} />
                 </div>
                 <div className='text-center p-5 space-y-2'>
