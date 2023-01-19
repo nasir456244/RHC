@@ -251,6 +251,7 @@ export const getStaticProps = async ({ params }) => {
       props: {
         collection
       },
-      revalidate: 10
+      revalidate: 10,
+      fallback: true
     }
   }
