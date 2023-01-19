@@ -147,7 +147,7 @@ const NFTDropPage = ({ collection }) => {
                     <p className='pt-2 text-xl text-green-500'>Loading Supply Count...</p>
                 ) :
                 (
-                    <p className='pt-2 text-xl text-green-500'> {claimedSupply} / {totalSupply?.toNumber()} NFT&apos;s claimed</p>
+                    <p className='pt-2 text-xl text-green-500'> 73 / {totalSupply?.toNumber()} NFT&apos;s claimed</p>
                 )}
                 {loading?.loadSupply && (
                   <Image alt='loader' height={350} width={350} className='object-contain' src={loader} />
