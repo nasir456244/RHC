@@ -98,8 +98,8 @@ const NFTDropPage = ({ collection }) => {
   return (
     <div className='h-screen flex flex-col lg:grid lg:grid-cols-10'>
       <Head>
-        <title>RHC NFTs collection</title>
-        <meta name="description" content="The Receding Hairline Club is a collection of 1000 unique RHC NFTs— unique digital collectibles living on the Polygon blockchain. " />
+        <title>BC NFTs collection</title>
+        <meta name="description" content="The Bidaar Club is a collection of 1000 unique BC NFTs— unique digital collectibles living on the Polygon blockchain. " />
       </Head>
       <Toaster position='bottom-center' />
         <div className='flex items-center justify-center bg-gradient-to-br 
@@ -125,7 +125,7 @@ const NFTDropPage = ({ collection }) => {
                     <h1 className='w-52 cursor-pointer text-gray-200 text-xl font-extralight 
                     sm:w-80'>The {''}
                         <span className='font-extrabold underline decoration-pink-400/50'>
-                            RHC 
+                            BC 
                         </span> {''}
                         NFT Market place</h1>
                 </Link>

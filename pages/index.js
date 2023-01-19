@@ -7,13 +7,13 @@ export default function Home({ collections }) {
   return (
     <div className='max-w-7xl mx-auto flex flex-col min-h-screen py-20 px-10 2xl:px-0'>
       <Head>
-        <title>RHC NFTs collection</title>
-        <meta name="description" content="The Receding Hairline Club is a collection of 1000 unique RHC NFTs— unique digital collectibles living on the Polygon blockchain. " />
+        <title>BC NFTs collection</title>
+        <meta name="description" content="The Bidaar Club is a collection of 1000 unique BC NFTs— unique digital collectibles living on the Polygon blockchain. " />
       </Head>
 
       <h1 className='mb-10 text-4xl text-gray-200 font-extralight'>The {''}
         <span className='font-extrabold underline decoration-pink-400/50'>
-          RHC 
+          BC 
         </span> {''}
         NFT Market place
       </h1>
